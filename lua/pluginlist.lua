@@ -19,9 +19,8 @@ return {
   "rust-lang/rust.vim",
 
 
-  "williamboman/mason.nvim",
+  --"williamboman/mason.nvim",
   "mbbill/undotree",
-  "folke/neodev.nvim",
   "HiPhish/rainbow-delimiters.nvim",
   -- "Olical/conjure",
 

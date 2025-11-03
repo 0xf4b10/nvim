@@ -10,4 +10,7 @@ vim.opt.timeoutlen = 900
 
 vim.keymap.set("n", "<Tab>", "<C-w>")
 
+-- Clear search highlights.
+vim.keymap.set("n", "<C-c>", ":nohl<CR>", { desc = "Clear search hl", silent = true })
+
 
