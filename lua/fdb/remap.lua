@@ -14,3 +14,4 @@ vim.keymap.set("n", "<Tab>", "<C-w>")
 vim.keymap.set("n", "<C-c>", ":nohl<CR>", { desc = "Clear search hl", silent = true })
 
 
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
