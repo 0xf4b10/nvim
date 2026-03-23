@@ -1,13 +1,17 @@
---
-
+-- All my plugins used via lazyvim.
 return {
+  -- We need three lspconfigs. The neovim one itself and mason together with mason-lspconfig.
   "neovim/nvim-lspconfig",
+  {
+    "mason-org/mason.nvim",
+    opts = {}
+  },
   {
     "mason-org/mason-lspconfig.nvim",
     opts = {},
     dependencies = {
       { "mason-org/mason.nvim", opts = {} },
-      "neovim/nvim-lspconfig",
+      { "neovim/nvim-lspconfig", opts = {}}
     },
   },
   {
@@ -21,10 +25,6 @@ return {
     'nvim-telescope/telescope.nvim',
     tag = '0.1.8',
     dependencies = { 'nvim-lua/plenary.nvim' }
-  },
-  {
-    "mason-org/mason.nvim",
-    opts = {}
   },
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/nvim-cmp",
@@ -41,16 +41,19 @@ return {
   },
   "mbbill/undotree",
   "HiPhish/rainbow-delimiters.nvim",
-  -- "Olical/conjure",
+  "Olical/conjure",
+  {
+    "julienvincent/nvim-paredit",
+    ft = { "scheme", "lisp", "clojure", "fennel" },
+    opts = {},
+  },
 
   {
     'tpope/vim-fugitive',
   },
   {
     'numToStr/Comment.nvim',
-    opts = {
-        -- add any options here
-    }
+    opts = {}
   },
   {
     'saghen/blink.cmp',
