@@ -3,15 +3,14 @@ return {
   -- We need three lspconfigs. The neovim one itself and mason together with mason-lspconfig.
   "neovim/nvim-lspconfig",
   {
-    "mason-org/mason.nvim",
+    "williamboman/mason.nvim",
     opts = {}
   },
   {
-    "mason-org/mason-lspconfig.nvim",
-    opts = {},
+    "williamboman/mason-lspconfig.nvim",
     dependencies = {
-      { "mason-org/mason.nvim", opts = {} },
-      { "neovim/nvim-lspconfig", opts = {}}
+      "williamboman/mason.nvim",
+      "neovim/nvim-lspconfig",
     },
   },
   {
@@ -28,7 +27,9 @@ return {
   },
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/nvim-cmp",
+  --
   "rust-lang/rust.vim",
+  -- This is a plugin for ...
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
@@ -40,6 +41,7 @@ return {
     lazy = false, -- neo-tree will lazily load itself
   },
   "mbbill/undotree",
+  -- Scheme/LISP-related plugins for better editing.
   "HiPhish/rainbow-delimiters.nvim",
   "Olical/conjure",
   {
@@ -106,19 +108,18 @@ return {
     },
     opts_extend = { "sources.default" }
   },
-
   -- Design packs, fonts and other niceness.
-  {
-    'nvimdev/dashboard-nvim',
-    theme = 'doom',
-    event = 'VimEnter',
-    config = function()
-      require('dashboard').setup {
-        -- config
-      }
-    end,
-    dependencies = {{'nvim-tree/nvim-web-devicons'}}
-  },
+  -- {
+  --   'nvimdev/dashboard-nvim',
+  --   theme = 'doom',
+  --   event = 'VimEnter',
+  --   config = function()
+  --     require('dashboard').setup {
+  --       -- config
+  --     }
+  --   end,
+  --   dependencies = {{'nvim-tree/nvim-web-devicons'}}
+  -- },
   {
     "catppuccin/nvim",
     name = "catppuccin",

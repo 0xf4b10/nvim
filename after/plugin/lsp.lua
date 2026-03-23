@@ -1,3 +1,6 @@
+-- Mason setup
+require("mason").setup()
+
 local on_attach = function(_, bufnr)
   local bufmap = function(keys, func)
     vim.keymap.set('n', keys, func, { buffer = bufnr })
@@ -22,38 +25,46 @@ local on_attach = function(_, bufnr)
   end, {})
 end
 
--- Use blink.cmp capabilities
-local capabilities = require('blink.cmp').get_lsp_capabilities()
+-- Use blink.cmp capabilities if available, otherwise fallback to default
+local capabilities = {}
+local has_blink, blink = pcall(require, 'blink.cmp')
+if has_blink then
+  capabilities = blink.get_lsp_capabilities()
+else
+  capabilities = require('cmp_nvim_lsp').default_capabilities()
+end
 
--- Mason setup
-require("mason").setup()
 require("mason-lspconfig").setup({
-  ensure_installed = { "lua_ls", "rust_analyzer", "pyright" },
+  ensure_installed = {
+    "lua_ls",
+    "rust_analyzer",
+    "pyright"
+  },
   handlers = {
-    -- -- Default handler for all servers
-    -- function(server_name)
-    --   require("lspconfig")[server_name].setup {
-    --     on_attach = on_attach,
-    --     capabilities = capabilities,
-    --   }
-    -- end,
+    -- Default handler for all servers
+    function(server_name)
+      require("lspconfig")[server_name].setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
+    end,
 
-    -- -- Custom handler for lua_ls
-    -- ["lua_ls"] = function()
-    --   require("lspconfig").lua_ls.setup {
-    --     on_attach = on_attach,
-    --     capabilities = capabilities,
-    --     settings = {
-    --       Lua = {
-    --         runtime = { version = 'LuaJIT' },
-    --         workspace = {
-    --           checkThirdParty = false,
-    --           library = { vim.env.VIMRUNTIME },
-    --         },
-    --         telemetry = { enable = false },
-    --       },
-    --     },
-    --   }
-    -- end,
+    -- Custom handler for lua_ls
+    ["lua_ls"] = function()
+      require("lspconfig").lua_ls.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+        settings = {
+          Lua = {
+            runtime = { version = 'LuaJIT' },
+            workspace = {
+              checkThirdParty = false,
+              library = { vim.env.VIMRUNTIME },
+            },
+            telemetry = { enable = false },
+          },
+        },
+      }
+    end,
   },
 })
